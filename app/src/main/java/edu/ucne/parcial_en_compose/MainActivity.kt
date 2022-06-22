@@ -10,8 +10,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import edu.ucne.parcial_en_compose.ui.theme.Parcial_en_composeTheme
+import edu.ucne.parcial_en_compose.ui.theme.prestamo.Consulta
+import edu.ucne.parcial_en_compose.ui.theme.prestamo.RegistroPrestamo
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -20,26 +25,39 @@ class MainActivity : ComponentActivity() {
         setContent {
             Parcial_en_composeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+                MyApp()
             }
         }
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MyApp() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
+    ) {
+        //Navegacion
+
+        val navHostController = rememberNavController( )
+
+        NavHost(navController = navHostController, startDestination = "NavegarConsulta") {
+
+            composable(route = "NavegarConsulta"){
+                Consulta(navHostController)
+            }
+            composable(route = "NavegarRegistro"){
+                RegistroPrestamo(navHostController)
+            }
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     Parcial_en_composeTheme {
-        Greeting("Android")
+        MyApp()
     }
 }
