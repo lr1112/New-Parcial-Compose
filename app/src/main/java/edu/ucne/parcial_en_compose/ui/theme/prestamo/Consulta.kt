@@ -3,9 +3,7 @@ package edu.ucne.parcial_en_compose.ui.theme.prestamo
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
@@ -28,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.room.util.TableInfo
+import edu.ucne.parcial_en_compose.R
 import edu.ucne.parcial_en_compose.model.Prestamo
 
 
@@ -63,11 +62,24 @@ fun Consulta(
 
 @Composable
 fun RowP(prest: Prestamo) {
-    Column(modifier = Modifier.padding(8.dp )) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp)
+                .padding(2.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = "DEUDOR: ${prest.deudor}")
+                Text(text = "MONTO: ${prest.monto}")
+                Icon(painter = painterResource(id = R.drawable.ic_baseline_attach_money_24), contentDescription =null )
 
-        Text(text = "1-DEUDOR: ${prest.deudor}",  modifier = Modifier.border(BorderStroke(2.dp, color = Color.Black)).padding(15.dp).fillMaxWidth())
-        Text(text = "2-CONCEPTO: ${prest.concepto}",modifier = Modifier.border(BorderStroke(2.dp, color = Color.Black)).padding(15.dp).fillMaxWidth())
-        Text(text = "3-MONTO: ${prest.monto}",modifier = Modifier.border(BorderStroke(2.dp, color = Color.Black)).padding(15.dp).fillMaxWidth())
+
+            }
+        Row(modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Start) {
+            Text(text = "CONCEPTO: ${prest.concepto}")
+
+        }
 
     }
     @Immutable
